@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { useQuery, QueryClient, hydrate } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
-import { fetchNotes } from "@/app/lib/api";
-import NoteList from "@/app/components/NoteList/NoteList";
-import Loading from "@/app/components/Loading/Loading";
-import ErrorMessage from "@/app/components/ErrorMessage/ErrorMessage";
-import Pagination from "@/app/components/Pagination/Pagination";
-import SearchBox from "@/app/components/SearchBox/SearchBox";
-import Modal from "@/app/components/Modal/Modal";
-import NoteForm from "@/app/components/NoteForm/NoteForm";
+import { fetchNotes } from "@/lib/api";
+import NoteList from "@/components/NoteList/NoteList";
+import Loading from "@/components/Loading/Loading";
+import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
+import Pagination from "@/components/Pagination/Pagination";
+import SearchBox from "@/components/SearchBox/SearchBox";
+import Modal from "@/components/Modal/Modal";
+import NoteForm from "@/components/NoteForm/NoteForm";
 
 export default function NotesClient({
   dehydratedState,

@@ -7,7 +7,7 @@ import {
   hydrate,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { fetchNoteById } from "@/app/lib/api";
+import { fetchNoteById } from "@/lib/api";
 import css from "./NoteDetails.client.module.css";
 
 export default function NoteDetailsClient({
