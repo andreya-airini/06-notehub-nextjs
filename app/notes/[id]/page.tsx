@@ -5,16 +5,14 @@ import NoteDetailsClient from "./NoteDetails.client";
 import { fetchNoteById } from "@/lib/api";
 
 interface NoteDetailsPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function NoteDetailsPage({
   params,
 }: NoteDetailsPageProps) {
-  const id = params.id;
-  if (!id) {
-    notFound();
-  }
+  const { id } = await params; // ⬅️ треба чекати
+  if (!id) notFound();
 
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
@@ -23,9 +21,7 @@ export default async function NoteDetailsPage({
   });
 
   const note = queryClient.getQueryData(["note", id]);
-  if (!note) {
-    notFound();
-  }
+  if (!note) notFound();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

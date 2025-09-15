@@ -27,7 +27,7 @@ function NoteDetails({ id }: { id: string }) {
   } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
-    refetchOnMount: false, // обов'язково явно false
+    refetchOnMount: false,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;

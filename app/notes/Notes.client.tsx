@@ -21,10 +21,13 @@ export default function NotesClient() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", page, debouncedSearch],
     queryFn: () => fetchNotes(page, debouncedSearch),
-    placeholderData: (prev) => prev, // Додаємо для плавної пагінації
+    placeholderData: (prev) => prev,
   });
 
-  const handleSearch = (query: string) => setSearch(query);
+  const handleSearch = (query: string) => {
+    setSearch(query);
+    setPage(1);
+  };
 
   if (isLoading) return <Loading />;
   if (isError) return <ErrorMessage />;
