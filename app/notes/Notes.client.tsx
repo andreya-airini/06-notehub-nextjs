@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, QueryClient, hydrate } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { fetchNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList/NoteList";
@@ -12,14 +12,7 @@ import SearchBox from "@/components/SearchBox/SearchBox";
 import Modal from "@/components/Modal/Modal";
 import NoteForm from "@/components/NoteForm/NoteForm";
 
-export default function NotesClient({
-  dehydratedState,
-}: {
-  dehydratedState: unknown;
-}) {
-  const [queryClient] = useState(() => new QueryClient());
-  hydrate(queryClient, dehydratedState);
-
+export default function NotesClient() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +21,7 @@ export default function NotesClient({
   const { data, isLoading, isError } = useQuery({
     queryKey: ["notes", page, debouncedSearch],
     queryFn: () => fetchNotes(page, debouncedSearch),
+    placeholderData: (prev) => prev, // Додаємо для плавної пагінації
   });
 
   const handleSearch = (query: string) => setSearch(query);
